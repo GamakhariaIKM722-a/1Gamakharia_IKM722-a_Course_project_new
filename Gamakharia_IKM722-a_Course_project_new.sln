@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gamakharia_IKM722-a_Course_project_new", "Gamakharia_IKM722-a_Course_project_new\Gamakharia_IKM722-a_Course_project_new.csproj", "{14C42E15-D852-4C8B-9FE2-49425E78145D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14C42E15-D852-4C8B-9FE2-49425E78145D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14C42E15-D852-4C8B-9FE2-49425E78145D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14C42E15-D852-4C8B-9FE2-49425E78145D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14C42E15-D852-4C8B-9FE2-49425E78145D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D426655-5FBF-4136-B742-0934E712D1CD}
+	EndGlobalSection
+EndGlobal
