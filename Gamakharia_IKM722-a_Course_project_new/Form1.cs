@@ -16,6 +16,7 @@ namespace Gamakharia_IKM722_a_Course_project_new
         private MajorWork MajorObject; // Створення об'єкта класу MajorWork
         public Form1()
         {
+            MajorObject = new MajorWork();
             InitializeComponent();
         }
 
@@ -28,6 +29,8 @@ namespace Gamakharia_IKM722_a_Course_project_new
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            MajorObject = new MajorWork();
+            MajorObject.SetTime();
             About A = new About(); // створення форми About
             A.tAbout.Start();
             A.ShowDialog(); // відображення діалогового вікна About
@@ -72,6 +75,13 @@ namespace Gamakharia_IKM722_a_Course_project_new
                 tClock.Start();
                 e.KeyChar = (char)0;
             }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            string s;
+            s = (System.DateTime.Now - MajorObject.GetTime()).ToString();
+            MessageBox.Show(s, "Час роботи програми"); // Виведення часу роботи програми іповідомлення "Час роботи програми" на екран
         }
     }
 }
