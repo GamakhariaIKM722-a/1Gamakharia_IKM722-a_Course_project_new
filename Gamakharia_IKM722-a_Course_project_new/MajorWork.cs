@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace Gamakharia_IKM722_a_Course_project_new
 {
@@ -18,7 +19,11 @@ namespace Gamakharia_IKM722_a_Course_project_new
         private string Result; // Поле результату
         public bool Modify;
         private int Key;// поле ключа
-        // Методи
+        public Stack myStack = new Stack();
+        public string[] myArr = new string[100];
+        public Queue myQueue = new Queue();
+        public string[] smyQueue = new string[100];
+        //Методи
         private string SaveFileName;// ім’я файлу для запису
         private string OpenFileName;// ім’я файлу для читання
         public void WriteSaveFileName(string S)// метод запису даних в об'єкт
