@@ -15,13 +15,32 @@ namespace Gamakharia_IKM722_a_Course_project_new
     {
         private bool Mode; // Режим дозволу / заборони введення даних
         private MajorWork MajorObject; // Створення об'єкта класу MajorWork
+        ToolStripLabel dateLabel;
+        ToolStripLabel timeLabel;
+        ToolStripLabel infoLabel;
+        Timer timer;
         public Form1()
         {
             MajorObject = new MajorWork();
             InitializeComponent();
+            infoLabel = new ToolStripLabel();
+            infoLabel.Text = "Текущие дата и время:";
+            dateLabel = new ToolStripLabel();
+            timeLabel = new ToolStripLabel();
+            statusStrip1.Items.Add(infoLabel);
+            statusStrip1.Items.Add(dateLabel);
+            statusStrip1.Items.Add(timeLabel);
+            timer = new Timer() { Interval = 1000 };
+            timer.Tick += timer_Tick;
+            timer.Start();
+        }
+        void timer_Tick(object sender, EventArgs e)
+        {
+            dateLabel.Text = DateTime.Now.ToLongDateString();
+            timeLabel.Text = DateTime.Now.ToLongTimeString();
         }
 
-        private void tClock_Tick(object sender, EventArgs e)
+            private void tClock_Tick(object sender, EventArgs e)
         {
             tClock.Stop();
             MessageBox.Show("Минуло 25 секунд", "Увага");// Виведення повідомлення"Минуло 25 секунд" на екран
@@ -36,8 +55,10 @@ namespace Gamakharia_IKM722_a_Course_project_new
             About A = new About(); // створення форми About
             A.tAbout.Start();
             A.ShowDialog(); // відображення діалогового вікна About
-            MajorObject = new MajorWork();
+            
             this.Mode = true;
+            toolTip1.SetToolTip(bSearch, "Натисніть на кнопку для пошуку"); 
+              toolTip1.IsBalloon = true;
         }
 
         private void bStart_Click(object sender, EventArgs e)
@@ -96,6 +117,7 @@ namespace Gamakharia_IKM722_a_Course_project_new
         private void проПрограммуToolStripMenuItem_Click(object sender, EventArgs e)
         {
             About A = new About();
+            A.progressBar1.Hide();
             A.ShowDialog();
         }
 
@@ -152,6 +174,7 @@ namespace Gamakharia_IKM722_a_Course_project_new
             MajorObject.NewRec();
             tbInput.Clear();// очистити вміст тексту
             label1.Text = "";
+            dgwOpen.Columns.Clear();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
