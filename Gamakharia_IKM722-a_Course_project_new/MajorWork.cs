@@ -29,6 +29,36 @@ namespace Gamakharia_IKM722_a_Course_project_new
         {
             this.OpenFileName = S;// запам'ятати ім’я файлу для відкриття
         }
+        // Методи
+        public void ReadFromFile(System.Windows.Forms.DataGridView DG) // зчитування з файлу
+        {
+            try
+            {
+                if (!File.Exists(this.OpenFileName))
+                {
+                    MessageBox.Show("Файлу немає"); // Виведення на екран повідомлення "файлу немає"
+                    return;
+                }
+                Stream S; // створення потоку
+                S = File.Open(this.OpenFileName, FileMode.Open); // зчитування даних з  файлу
+                Buffer D;
+                object O; // буферна змінна для контролю формату
+                BinaryFormatter BF = new BinaryFormatter(); // створення об'єкту для форматування
+
+                while (S.Position < S.Length)
+                {
+                    O = BF.Deserialize(S); // десеріалізація
+                    D = O as Buffer;
+                    if (D == null) break;
+                    // Виведення даних на екран
+                }
+                S.Close(); // закриття
+            }
+            catch
+            {
+                MessageBox.Show("Помилка файлу"); // Виведення на екран повідомлення "Помилка файлу"
+            }
+        } // ReadFromFile закінчився
         public void SaveToFile() // Запис даних до файлу
         {
             if (!this.Modify)
@@ -44,6 +74,7 @@ namespace Gamakharia_IKM722_a_Course_project_new
                 D.Data = this.Data;
                 D.Result = Convert.ToString(this.Result);
                 D.Key = Key;
+                Key++;
                 BinaryFormatter BF = new BinaryFormatter(); // створення об'єкта для форматування
                      BF.Serialize(S, D);
                 S.Flush(); // очищення буфера потоку
@@ -54,6 +85,46 @@ namespace Gamakharia_IKM722_a_Course_project_new
             {
 
                 MessageBox.Show("Помилка роботи з файлом"); // Виведення на екран повідомлення "Помилка роботи з файлом"
+            }
+        }
+        public bool SaveFileNameExists()
+        {
+            if (this.SaveFileName == null)
+                return false;
+            else return true;
+        }
+        public void NewRec() // новий запис
+        {
+            this.Data = ""; // "" - ознака порожнього рядка
+            this.Result = null; // для string- null
+        }
+        public void Generator() // метод формування ключового поля
+        {
+            try
+            {
+                if (!File.Exists(this.SaveFileName)) // існує файл?
+                {
+                    Key = 1;
+                    return;
+                }
+                Stream S; // створення потоку
+                S = File.Open(this.SaveFileName, FileMode.Open); // Відкриття файлу
+                Buffer D;
+                object O; // буферна змінна для контролю формату
+                BinaryFormatter BF = new BinaryFormatter(); // створення елементу для форматування
+                while (S.Position < S.Length)
+                {
+                    O = BF.Deserialize(S);
+                    D = O as Buffer;
+                    if (D == null) break;
+                    Key = D.Key;
+                }
+                Key++;
+                S.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Помилка файлу"); // Виведення на екран повідомлення "Помилка файлу"
             }
         }
         public void SetTime() // метод запису часу початку роботи програми

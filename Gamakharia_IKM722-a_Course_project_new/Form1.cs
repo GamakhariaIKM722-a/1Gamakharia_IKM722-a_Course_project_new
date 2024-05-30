@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,6 +104,7 @@ namespace Gamakharia_IKM722_a_Course_project_new
             if (sfdSave.ShowDialog() == DialogResult.OK)// Виклик діалогового вікна збереженняфайлу
             {
                 MajorObject.WriteSaveFileName(sfdSave.FileName); // написання імені файлу
+                MajorObject.Generator();
                 MajorObject.SaveToFile(); // метод збереження в файл
             }
         }
@@ -136,6 +136,29 @@ namespace Gamakharia_IKM722_a_Course_project_new
             }
 
             MessageBox.Show(disk, "Накопичувачі");
+        }
+
+        private void зберегтиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MajorObject.SaveFileNameExists()) // задане ім’я файлу існує?
+                MajorObject.SaveToFile(); // зберегти дані в файл
+            else
+                зберегтиЯкToolStripMenuItem_Click(sender, e); //
+        }
+
+        private void новийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MajorObject.NewRec();
+            tbInput.Clear();// очистити вміст тексту
+            label1.Text = "";
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MajorObject.Modify)
+                if (MessageBox.Show("Дані не були збережені. Продовжити вихід?", "УВАГА",
+                MessageBoxButtons.YesNo) == DialogResult.No)
+                    e.Cancel = true; // припинити закриття
         }
     }
 }
